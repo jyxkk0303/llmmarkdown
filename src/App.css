@@ -1,0 +1,123 @@
+/* src/App.css */
+
+body {
+  margin: 0; padding: 0; height: 100vh; width: 100vw;
+  background-color: #f0f2f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.app-card {
+  width: 95vw; height: 90vh;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+
+/* --- 顶部控制栏升级 --- */
+.header {
+  height: 60px; /* 稍微高一点放下控件 */
+  min-height: 60px;
+  border-bottom: 1px solid #eaeaea;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: #fff; z-index: 10;
+}
+
+.title-area h1 { font-size: 18px; font-weight: 700; color: #1f2937; margin: 0; }
+.subtitle { font-size: 12px; color: #6b7280; margin-left: 4px; }
+
+.controls { display: flex; align-items: center; gap: 20px; }
+
+.control-group {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: #555;
+  background: #f3f4f6; padding: 4px 10px; border-radius: 6px;
+}
+.control-group input[type="range"] { width: 60px; cursor: pointer; }
+
+.checkbox-label {
+  font-size: 13px; color: #374151; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; user-select: none;
+}
+.checkbox-label input { cursor: pointer; }
+
+/* 重点按钮样式 */
+.btn-primary {
+  background: #eff6ff; color: #2563eb;
+  padding: 6px 12px; border-radius: 6px; font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #dbeafe; }
+
+/* --- 主体区域 --- */
+.editor-body { flex: 1; display: flex; flex-direction: row; overflow: hidden; }
+.pane { flex: 1; display: flex; flex-direction: column; height: 100%; position: relative; }
+.pane.left { background-color: #fafafa; border-right: 1px solid #eaeaea; }
+.pane-title {
+  height: 32px; line-height: 32px; padding: 0 20px;
+  font-size: 11px; color: #6b7280; font-weight: 700; text-transform: uppercase;
+  background: rgba(255,255,255,0.9); border-bottom: 1px solid #f0f0f0;
+  display: flex; justify-content: space-between;
+}
+
+.input-area, .output-area {
+  flex: 1; width: 100%; padding: 30px;
+  overflow-y: auto; box-sizing: border-box;
+}
+
+.input-area {
+  border: none; background: transparent; resize: none; outline: none;
+  font-family: 'Consolas', 'Menlo', monospace; font-size: 14px; line-height: 1.6; color: #333;
+}
+
+/* --- Markdown 渲染样式 --- */
+.output-area { color: #24292e; line-height: 1.75; font-size: 15px; }
+.output-area h1, .output-area h2, .output-area h3 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+.output-area p { margin: 16px 0; }
+.output-area ul, .output-area ol { padding-left: 2em; margin-bottom: 16px; }
+.output-area li { margin: 4px 0; }
+.output-area blockquote { padding: 0 1em; color: #6a737d; border-left: 0.25em solid #dfe2e5; background-color: #f9f9f9; margin: 16px 0; }
+
+.output-area table { display: block; width: 100%; overflow-x: auto; border-spacing: 0; border-collapse: collapse; margin: 20px 0; }
+.output-area th, .output-area td { padding: 8px 13px; border: 1px solid #d0d7de; }
+.output-area th { font-weight: 600; background-color: #f6f8fa; }
+.output-area tr:nth-child(2n) { background-color: #fcfcfc; }
+.output-area img { max-width: 100%; border-radius: 4px; }
+
+/* 指令样式 */
+.badge { display: inline-block; padding: 2px 8px; font-size: 12px; font-weight: 600; border-radius: 999px; margin: 0 4px; vertical-align: text-bottom; }
+.badge-default { background: #e0e0e0; color: #333; }
+.badge-success { background: #dcfce7; color: #166534; }
+.badge-warning { background: #fef9c3; color: #854d0e; }
+.badge-danger  { background: #fee2e2; color: #991b1b; }
+
+.callout { padding: 16px; margin: 16px 0; border: 1px solid; border-radius: 6px; border-left-width: 4px; }
+.callout-info { background: #f0f9ff; border-color: #b9e6fe; border-left-color: #0ea5e9; color: #0c4a6e; }
+.callout-danger { background: #fef2f2; border-color: #fecaca; border-left-color: #dc2626; color: #7f1d1d; }
+
+.spoiler { background: #000; color: #000; border-radius: 3px; padding: 2px 4px; cursor: help; transition: all 0.2s; }
+.spoiler:hover { color: #fff; background: #333; }
+
+.typing-indicator { animation: blink 1s step-end infinite; color: #3b82f6; }
+@keyframes blink { 50% { opacity: 0; } }
+/* ...保留之前的 CSS... */
+
+/* 新增：未识别语言或未闭合代码块的兜底样式 */
+.code-block-fallback {
+  background: #1e1e1e; /* VSCode 默认黑底 */
+  color: #d4d4d4;
+  padding: 1em;
+  margin: 0.5em 0;
+  border-radius: 4px;
+  overflow: auto;
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 14px;
+}
+.code-block-fallback code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
